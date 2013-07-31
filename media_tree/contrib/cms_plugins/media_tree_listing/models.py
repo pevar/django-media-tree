@@ -20,6 +20,12 @@ class MediaTreeListingBase(CMSPlugin):
     def __unicode__(self):
         # TODO return node list
         return ''
+        
+    def copy_relations(self, oldinstance):
+        for media_item in oldinstance.media_items.all():
+            media_item.pk = None
+            media_item.list_plugin = self
+            media_item.save()
 
 
 class MediaTreeListingItemBase(models.Model):
